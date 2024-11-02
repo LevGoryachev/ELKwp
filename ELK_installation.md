@@ -56,6 +56,11 @@ Generate an enrollment token for Elasticsearch nodes with
 Check status:
 systemctl status elasticsearch.service
 
+Start, status, stop:
+systemctl status elasticsearch.service
+systemctl start elasticsearch.service
+systemctl stop elasticsearch.service
+
 Add Elastisearch to autorun:
 systemctl daemon-reload
 systemctl enable elasticsearch.service
@@ -70,7 +75,71 @@ Check working:
 curl -k -u elastic:abc12345 https://localhost:9200/
 
 Where:
+elastic - username (user account of Elasticsearch)
 abc12345 - Elastic password from the previously mentioned info you copied from console.
+
+LOGSTASH_INSTALLATION:
+1. Key - if necessary
+2. Repo - if necessary
+
+3. Install Logstash:
+   apt install logstash
+
+4. Add autorun:
+   systemctl enable logstash.service
+
+5. Configs:
+
+Main default config - /etc/logstash/logstash.yml
+
+5.1 Create input.conf in dir /etc/logstash/conf.d
+input.conf, context:
+
+---
+input {
+beats {
+port => 5044
+}
+}
+---
+
+There is a port to receive info from 'beats'.
+
+
+5.2 Create output.conf in dir /etc/logstash/conf.d
+output.conf, context:
+-------------
+output {
+elasticsearch {
+hosts    => "https://localhost:9200"
+index    => "websrv-%{+YYYY.MM}"
+user => "elastic"
+password => "abc12345"
+cacert => "/etc/logstash/certs/http_ca.crt"
+}
+}
+-------------
+
+
+5.3 Copy certs to Logstash:
+cp -R /etc/elasticsearch/certs /etc/logstash
+
+(should be according to 5.2 output cacert)
+
+5.4 Set owner:
+chown -R root:logstash /etc/logstash/certs
+
+---
+configurations, filters ???
+---
+
+Start, status, stop
+systemctl status logstash.service
+systemctl start logstash.service
+systemctl stop logstash.service
+
+
+
 
 @LevGoryachev
 

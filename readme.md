@@ -10,9 +10,10 @@ Gradle
 
 
 Инструкции для установки на Debian11 (написал процессе установки)
-elastic_installation
-Logstash_installation  - добавлю позднее.
-Kibana_installation - добавлю позднее.
+ELK_installation.md
+
+Примеры работы с компонетами:
+Examples_for_Elasticsearch.md
 
 NGINX_instruction - для проброски с портов хоста на локальные порты инструментов.
 
