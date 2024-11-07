@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration status="WARN" strict="true">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+        <Socket name="Logstash" host="localhost" port="8085">
+            <JsonLayout compact="true" eventEol="true" />
+        </Socket>
+    </appenders>
+
+    <springProfile name="dev,staging">
+        <loggers>
+            <logger name="com.goryachev.elkwp.ScheduledLoggingService" level="DEBUG" additivity="false">
+                <appender-ref ref="Console"/>
+            </logger>
+            <logger name="org.springframework" level="debug" additivity="false">
+                <AppenderRef ref="Logstash"/>
+            </logger>
+        </loggers>
+    </springProfile>
+    <!--TODO-->
+    <!--<springProfile name="prod">
+        <loggers>
+            TODO
+        </loggers>
+    </springProfile>-->
+</configuration>
