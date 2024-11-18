@@ -17,6 +17,7 @@ public class ScheduledLoggingService {
     public void generateSimpleLogs() throws InterruptedException {
 
         Logger logger = LoggerFactory.getLogger(ScheduledLoggingService.class);
+        logger.info("Envs: " + System.getenv());
         logger.info("hello logs - info");
         Thread.sleep(1000);
         logger.debug("hello logs - debug");
