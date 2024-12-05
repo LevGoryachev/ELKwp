@@ -7,7 +7,7 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
         </Console>
-        <Socket name="Logstash" host="localhost" port="8085">
+        <Socket name="Logstash" host="localhost" port="8086">
             <JsonLayout compact="true" eventEol="true" />
         </Socket>
     </appenders>
