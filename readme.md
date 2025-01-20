@@ -28,3 +28,11 @@ Examples_for_Elasticsearch.md
 NGINX_instruction - для проброски с портов хоста на локальные порты инструментов.
 
 МР - в ветку dev. 
+
+Варианты конфигураций
+В Master - "стандартная" конфигурация spring-boot-starter
+
+ветка: V_1_log4j2:
+    Подключена библиотека spring-boot-starter-log4j2
+    Отключена библиотека 'spring-boot-starter-logging'
+    Конфиг в logback-spring.xml
